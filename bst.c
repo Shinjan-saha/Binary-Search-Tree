@@ -64,6 +64,24 @@ struct TreeNode* deleteNode(struct TreeNode* root, int data) {
     return root;
 }
 
+// Function to search for a value in the BST
+void search(struct TreeNode* root, int value) {
+    if (root == NULL) {
+        printf("Element is not found in the BST.\n");
+        return;
+    }
+
+    if (value == root->data) {
+        printf("Element is found in the BST: %d\n", root->data);
+        return;
+    }
+
+    if (value < root->data)
+        search(root->left, value);
+    else
+        search(root->right, value);
+}
+
 // Function to print the BST in inorder traversal
 void inorderTraversal(struct TreeNode* root) {
     if (root == NULL)
@@ -82,8 +100,9 @@ int main() {
         printf("\nBinary Search Tree Operations\n");
         printf("1. Insert a node\n");
         printf("2. Delete a node\n");
-        printf("3. Print in-order traversal\n");
-        printf("4. Exit\n");
+        printf("3. Search for an element\n");
+        printf("4. Print in-order traversal\n");
+        printf("5. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -99,11 +118,16 @@ int main() {
                 root = deleteNode(root, value);
                 break;
             case 3:
+                printf("Enter the value to search: ");
+                scanf("%d", &value);
+                search(root, value);
+                break;
+            case 4:
                 printf("In-order traversal: ");
                 inorderTraversal(root);
                 printf("\n");
                 break;
-            case 4:
+            case 5:
                 exit(0);
             default:
                 printf("Invalid choice. Please try again.\n");
